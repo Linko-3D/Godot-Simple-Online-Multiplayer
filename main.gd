@@ -2,34 +2,14 @@ extends Node
 
 
 @export var player : PackedScene
-@export var spec_cam : PackedScene
 @export var map : PackedScene
-
-var spawned = false
 
 
 func _ready() -> void:
-	%Lobby.hide()
-	%Server.hide()
-	
 	var upnp = UPNP.new()
 	upnp.discover()
 	upnp.add_port_mapping(9999)
 	%PublicIP.text = upnp.query_external_address()
-
-
-func _process(delta: float) -> void:
-	if %Menu.visible or %Lobby.visible or multiplayer.is_server():
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_cancel") and not multiplayer.is_server():
-		%Lobby.visible = !%Lobby.visible
-		%EnterButton.visible = !spawned
-		%ResumeButton.visible = spawned
 
 
 func _on_host_button_pressed() -> void:
@@ -60,13 +40,7 @@ func _on_to_text_submitted(new_text: String) -> void:
 func load_game():
 	%Menu.hide()
 	%MapInstance.add_child(map.instantiate())
-
-
-	if not multiplayer.is_server():
-		%Lobby.show()
-	
-	%EnterButton.visible = !spawned
-	%ResumeButton.visible = spawned
+	add_player.rpc_id(1, multiplayer.get_unique_id())
 
 
 func connection_lost():
@@ -80,39 +54,10 @@ func connection_lost():
 func add_player(id):
 	var player_instance = player.instantiate()
 	player_instance.name = str(id)
-
-	%Players.add_child(player_instance)
+	%SpawnArea.add_child(player_instance)
 
 
 @rpc("any_peer")
 func remove_player(id):
-	if %Players.get_node(str(id)):
-		%Players.get_node(str(id)).queue_free()
-
-
-func _on_enter_button_pressed() -> void:
-	add_player.rpc_id(1, multiplayer.get_unique_id())
-	%Lobby.hide()
-	spawned = true
-
-	if get_node("SpecCamera3D"):
-		get_node("SpecCamera3D").queue_free()
-
-
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()
-
-
-func _on_resume_button_pressed() -> void:
-	%Lobby.hide()
-
-
-func _on_spectate_button_pressed() -> void:
-	remove_player.rpc_id(1, multiplayer.get_unique_id())
-	spawned = false
-	%Lobby.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-	if not get_node("SpecCamera3D"):
-		var spec_cam_instance = spec_cam.instantiate()
-		add_child(spec_cam_instance)
+	if %SpawnArea.get_node(str(id)):
+		%SpawnArea.get_node(str(id)).queue_free()
