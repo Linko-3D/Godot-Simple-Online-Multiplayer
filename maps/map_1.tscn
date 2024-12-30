@@ -17,5 +17,5 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.788235, 0.760784, 0.678431, 1)
 
-[node name="Node2D" type="Node2D" parent="." groups=["spawn_point"]]
-position = Vector2(200, 150)
+[node name="SpawnPoint" type="Node2D" parent="." groups=["spawn_point"]]
+position = Vector2(250, 200)
