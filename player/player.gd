@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
 
 
 func _ready() -> void:
@@ -10,6 +9,7 @@ func _ready() -> void:
 	%DisplayAuthority.visible = is_multiplayer_authority()
 
 	position = get_tree().get_nodes_in_group("spawn_point")[0].position
+
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
