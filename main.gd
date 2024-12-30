@@ -54,10 +54,10 @@ func connection_lost():
 func add_player(id):
 	var player_instance = player.instantiate()
 	player_instance.name = str(id)
-	%SpawnArea.add_child(player_instance)
+	%Players.add_child(player_instance)
 
 
 @rpc("any_peer")
 func remove_player(id):
-	if %SpawnArea.get_node(str(id)):
-		%SpawnArea.get_node(str(id)).queue_free()
+	if %Players.get_node(str(id)):
+		%Players.get_node(str(id)).queue_free()
