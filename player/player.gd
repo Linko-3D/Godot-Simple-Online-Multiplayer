@@ -7,7 +7,6 @@ var speed = 400.0
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 	%DisplayAuthority.visible = is_multiplayer_authority()
-
 	position = get_tree().get_nodes_in_group("spawn_point")[0].position
 
 
