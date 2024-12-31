@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 400.0
+const SPEED = 400.0
 
 
 func _enter_tree() -> void:
@@ -13,5 +13,5 @@ func _enter_tree() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
 
-	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * speed
+	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 	move_and_slide()
