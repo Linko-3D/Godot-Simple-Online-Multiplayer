@@ -11,6 +11,8 @@ func _ready() -> void:
 	upnp.add_port_mapping(9999)
 	%PublicIP.text = upnp.query_external_address()
 
+	_on_join_button_pressed() # The clients will automatically join if a local server is created
+
 
 func _on_host_button_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
