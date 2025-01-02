@@ -41,15 +41,15 @@ func _on_to_text_submitted(new_text: String) -> void:
 
 func load_game():
 	%Menu.hide()
-	%MapInstance.add_child(map.instantiate())
+	%Map.add_child(map.instantiate())
 	add_player.rpc_id(1, multiplayer.get_unique_id())
 
 
 func connection_lost():
 	%Menu.show()
 
-	if %MapInstance.get_child(0):
-		%MapInstance.get_child(0).queue_free()
+	if %Map.get_child(0):
+		%Map.get_child(0).queue_free()
 
 
 @rpc("any_peer")

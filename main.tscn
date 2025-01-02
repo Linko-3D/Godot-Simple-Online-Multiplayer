@@ -9,7 +9,7 @@ script = ExtResource("1_rst6k")
 player = ExtResource("2_mkv17")
 map = ExtResource("3_yaipi")
 
-[node name="MapInstance" type="Node" parent="."]
+[node name="Map" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Players" type="Node2D" parent="."]
@@ -19,6 +19,8 @@ y_sort_enabled = true
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://kyjyh0j5vvx5")
 spawn_path = NodePath("../Players")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 
 [node name="Server" type="Control" parent="."]
 unique_name_in_owner = true
