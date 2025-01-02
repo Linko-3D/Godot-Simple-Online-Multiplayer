@@ -12,10 +12,11 @@ map = ExtResource("3_yaipi")
 [node name="MapInstance" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Players" type="Node" parent="."]
+[node name="Players" type="Node2D" parent="."]
 unique_name_in_owner = true
+y_sort_enabled = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://kyjyh0j5vvx5")
 spawn_path = NodePath("../Players")
 
