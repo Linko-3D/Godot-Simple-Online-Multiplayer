@@ -41,7 +41,10 @@ func _on_to_text_submitted(new_text: String) -> void:
 
 func load_game():
 	%Menu.hide()
-	%Map.add_child(map.instantiate())
+
+	if multiplayer.is_server(): # The server loads each new map first
+		%Map.add_child(map.instantiate())
+
 	add_player.rpc_id(1, multiplayer.get_unique_id())
 
 

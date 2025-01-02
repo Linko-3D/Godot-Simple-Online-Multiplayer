@@ -20,6 +20,10 @@ y_sort_enabled = true
 _spawnable_scenes = PackedStringArray("uid://kyjyh0j5vvx5")
 spawn_path = NodePath("../Players")
 
+[node name="MapSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cboa7qsgpwkht")
+spawn_path = NodePath("../Map")
+
 [node name="Server" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
