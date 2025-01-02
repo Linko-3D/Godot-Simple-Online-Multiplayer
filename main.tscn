@@ -15,6 +15,10 @@ unique_name_in_owner = true
 [node name="Players" type="Node" parent="."]
 unique_name_in_owner = true
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://kyjyh0j5vvx5")
+spawn_path = NodePath("../Players")
+
 [node name="Server" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -92,10 +96,6 @@ placeholder_text = "Enter server IP"
 [node name="JoinButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Join"
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://kyjyh0j5vvx5")
-spawn_path = NodePath("../Players")
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="text_submitted" from="Menu/MarginContainer/VBoxContainer/HBoxContainer/To" to="." method="_on_to_text_submitted"]
