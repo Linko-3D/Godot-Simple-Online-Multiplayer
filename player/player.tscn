@@ -1,11 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://kyjyh0j5vvx5"]
+[gd_scene load_steps=4 format=3 uid="uid://kyjyh0j5vvx5"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_m55yk"]
+[ext_resource type="Script" uid="uid://b2j1gtyaxbgih" path="res://player/player.gd" id="1_m55yk"]
 [ext_resource type="Texture2D" uid="uid://iyjnrupf54lv" path="res://icon.svg" id="1_qmb3f"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fcbiy"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_weray"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
@@ -26,6 +24,3 @@ texture = ExtResource("1_qmb3f")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_fcbiy")
-
-[node name="MultiplayerSynchronizer2" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_weray")
