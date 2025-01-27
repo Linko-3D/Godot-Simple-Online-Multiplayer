@@ -34,6 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="Server"]
 layout_mode = 1
@@ -61,6 +62,7 @@ grow_vertical = 2
 border_color = Color(1, 1, 1, 1)
 border_width = 6.0
 editor_only = false
+metadata/_edit_lock_ = true
 
 [node name="Chat" type="Control" parent="."]
 unique_name_in_owner = true
@@ -70,6 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Say" type="LineEdit" parent="Chat"]
 unique_name_in_owner = true
