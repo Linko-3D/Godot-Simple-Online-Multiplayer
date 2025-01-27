@@ -6,12 +6,24 @@ extends Node
 
 
 func _ready() -> void:
+	print(get_viewport().size.x)
 	var upnp = UPNP.new()
 	upnp.discover()
 	upnp.add_port_mapping(9999)
 	%PublicIP.text = upnp.query_external_address()
 
 	_on_join_button_pressed() # The clients will automatically join if a local server is created
+
+
+func _process(delta: float) -> void:
+	%Say.size.x = get_viewport().size.x / 2
+	%Say.position.x = get_viewport().size.x / 4
+	if Input.is_action_just_pressed("ui_accept"):
+		%Say.visible = !%Say.visible
+		if not %Say.visible:
+			send_message.rpc(multiplayer.get_unique_id(), %Say.text)
+			%Say.text = ""
+			
 
 
 func _on_host_button_pressed() -> void:
@@ -66,3 +78,17 @@ func add_player(id):
 func remove_player(id):
 	if %Players.get_node(str(id)):
 		%Players.get_node(str(id)).queue_free()
+
+
+@rpc("call_local", "any_peer")
+func send_message(id, message):
+	var label = Label.new()
+	label.modulate = Color(1, 0.75, 0)
+	if id == 1:
+		label.modulate = Color.GREEN
+		label.text = "SERVER: " + message
+	else:
+		label.text = str(id) + ": " + message
+	%Messages.get_child(6).queue_free()
+	%Messages.add_child(label)
+	%Messages.move_child(label, 0)

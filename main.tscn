@@ -27,7 +27,7 @@ spawn_path = NodePath("../Map")
 [node name="Server" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0, 1, 0, 1)
+modulate = Color(1, 0.75, 0, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,13 +35,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PublicIP" type="Label" parent="Server"]
-unique_name_in_owner = true
+[node name="PanelContainer" type="PanelContainer" parent="Server"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Server/PanelContainer"]
+layout_mode = 2
+
+[node name="PublicIP" type="Label" parent="Server/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -55,6 +61,73 @@ grow_vertical = 2
 border_color = Color(1, 1, 1, 1)
 border_width = 6.0
 editor_only = false
+
+[node name="Chat" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Say" type="LineEdit" parent="Chat"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -15.5
+offset_right = 288.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Say"
+
+[node name="PanelContainer" type="PanelContainer" parent="Chat"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -195.0
+offset_right = 214.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Chat/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Messages" type="VBoxContainer" parent="Chat/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label0" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
+
+[node name="Label1" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+layout_mode = 2
 
 [node name="Menu" type="PanelContainer" parent="."]
 unique_name_in_owner = true
