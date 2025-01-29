@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
 		if %Say.text != "" and not %Say.visible:
 			send_message.rpc(multiplayer.get_unique_id(), %Say.text)
 			%Say.text = ""
-			
 
 
 func _on_host_button_pressed() -> void:
@@ -51,7 +50,8 @@ func _on_join_button_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 
 	multiplayer.connected_to_server.connect(load_game)
-	multiplayer.server_disconnected.connect(connection_lost)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	multiplayer.connection_failed.connect(_on_connection_failed)
 
 
 func _on_to_text_submitted(new_text: String) -> void:
@@ -67,8 +67,13 @@ func load_game():
 		%Lobby.show()
 
 
-func connection_lost():
+func _on_connection_failed():
+	pass
+
+
+func _on_server_disconnected():
 	%Menu.show()
+	%Lobby.hide()
 
 	if %Map.get_child(0):
 		%Map.get_child(0).queue_free()
