@@ -78,20 +78,21 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -288.0
-offset_top = -15.5
+offset_top = -31.0
 offset_right = 288.0
-offset_bottom = 15.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 placeholder_text = "Say"
 
-[node name="PanelContainer" type="PanelContainer" parent="Chat"]
+[node name="MessagesBox" type="PanelContainer" parent="Chat"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -100,37 +101,67 @@ offset_top = -195.0
 offset_right = 214.0
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Chat/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Chat/MessagesBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Messages" type="VBoxContainer" parent="Chat/PanelContainer/MarginContainer"]
+[node name="Messages" type="VBoxContainer" parent="Chat/MessagesBox/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label0" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label0" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
-[node name="Label1" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label1" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label2" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label3" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label4" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label5" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
-[node name="Label6" type="Label" parent="Chat/PanelContainer/MarginContainer/Messages"]
+[node name="Label6" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
+
+[node name="Lobby" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -55.0
+offset_right = 96.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Lobby"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EnterButton" type="Button" parent="Lobby/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enter game"
 
 [node name="Menu" type="PanelContainer" parent="."]
 unique_name_in_owner = true
@@ -178,6 +209,13 @@ placeholder_text = "Enter server IP"
 layout_mode = 2
 text = "Join"
 
+[node name="MessagesDisapearTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[connection signal="pressed" from="Lobby/MarginContainer/VBoxContainer/EnterButton" to="." method="_on_enter_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="text_submitted" from="Menu/MarginContainer/VBoxContainer/HBoxContainer/To" to="." method="_on_to_text_submitted"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/HBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="timeout" from="MessagesDisapearTimer" to="." method="_on_messages_disapear_timer_timeout"]

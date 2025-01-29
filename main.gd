@@ -18,9 +18,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	%Say.size.x = get_viewport().size.x / 2
 	%Say.position.x = get_viewport().size.x / 4
+	%Say.position.y = (get_viewport().size.y / 4) * 3
 	if Input.is_action_just_pressed("ui_accept"):
 		%Say.visible = !%Say.visible
-		if not %Say.visible:
+		if %Say.visible:
+			%MessagesBox.show()
+			%MessagesDisapearTimer.stop()
+		else:
+			%MessagesDisapearTimer.start()
+			
+		if %Say.text != "" and not %Say.visible:
 			send_message.rpc(multiplayer.get_unique_id(), %Say.text)
 			%Say.text = ""
 			
@@ -56,8 +63,8 @@ func load_game():
 
 	if multiplayer.is_server():
 		%Map.add_child(map.instantiate())
-
-	add_player.rpc_id(1, multiplayer.get_unique_id())
+	else:
+		%Lobby.show()
 
 
 func connection_lost():
@@ -82,6 +89,7 @@ func remove_player(id):
 
 @rpc("call_local", "any_peer")
 func send_message(id, message):
+	%MessagesBox.show()
 	var label = Label.new()
 	label.modulate = Color(1, 0.75, 0)
 	if id == 1:
@@ -92,3 +100,13 @@ func send_message(id, message):
 	%Messages.get_child(6).queue_free()
 	%Messages.add_child(label)
 	%Messages.move_child(label, 0)
+	%MessagesDisapearTimer.start()
+
+
+func _on_enter_button_pressed() -> void:
+	add_player.rpc_id(1, multiplayer.get_unique_id())
+	%Lobby.hide()
+
+
+func _on_messages_disapear_timer_timeout() -> void:
+	%MessagesBox.hide()
