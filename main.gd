@@ -4,9 +4,10 @@ extends Node
 @export var player : PackedScene
 @export var map : PackedScene
 
+var upnp = UPNP.new()
+
 
 func _ready() -> void:
-	var upnp = UPNP.new()
 	upnp.discover()
 	upnp.add_port_mapping(12345)
 	%PublicIP.text = upnp.query_external_address()
