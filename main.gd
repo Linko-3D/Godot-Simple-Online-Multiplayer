@@ -6,10 +6,9 @@ extends Node
 
 
 func _ready() -> void:
-	print(get_viewport().size.x)
 	var upnp = UPNP.new()
 	upnp.discover()
-	upnp.add_port_mapping(9999)
+	upnp.add_port_mapping(12345)
 	%PublicIP.text = upnp.query_external_address()
 
 	_on_join_button_pressed() # The clients will automatically join if a local server is created
@@ -19,7 +18,7 @@ func _process(delta: float) -> void:
 	%Say.size.x = get_viewport().size.x / 2
 	%Say.position.x = get_viewport().size.x / 4
 	%Say.position.y = (get_viewport().size.y / 4) * 3
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("accept"):
 		%Say.visible = !%Say.visible
 		if %Say.visible:
 			%MessagesBox.show()
@@ -34,7 +33,7 @@ func _process(delta: float) -> void:
 
 func _on_host_button_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(9999)
+	peer.create_server(12345)
 	multiplayer.multiplayer_peer = peer
 
 	multiplayer.peer_disconnected.connect(remove_player)
@@ -46,7 +45,7 @@ func _on_host_button_pressed() -> void:
 
 func _on_join_button_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(%To.text, 9999)
+	peer.create_client(%To.text, 12345)
 	multiplayer.multiplayer_peer = peer
 
 	multiplayer.connected_to_server.connect(load_game)

@@ -74,22 +74,6 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Say" type="LineEdit" parent="Chat"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -288.0
-offset_top = -31.0
-offset_right = 288.0
-grow_horizontal = 2
-grow_vertical = 0
-placeholder_text = "Say"
-
 [node name="MessagesBox" type="PanelContainer" parent="Chat"]
 unique_name_in_owner = true
 visible = false
@@ -133,6 +117,22 @@ layout_mode = 2
 [node name="Label6" type="Label" parent="Chat/MessagesBox/MarginContainer/Messages"]
 layout_mode = 2
 
+[node name="Say" type="LineEdit" parent="Chat"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_top = -31.0
+offset_right = 288.0
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "Say"
+
 [node name="Lobby" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -158,6 +158,14 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="Lobby/MarginContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Lobby/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Anonymous"
+
+[node name="HSeparator" type="HSeparator" parent="Lobby/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 
 [node name="EnterButton" type="Button" parent="Lobby/MarginContainer/VBoxContainer"]
 layout_mode = 2

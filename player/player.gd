@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 400.0
-
+var can_control = true # Doesn't move the player while chatting
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
@@ -13,7 +13,7 @@ func _enter_tree() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority() or not can_control: return
 
-	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
+	velocity = Input.get_vector("left", "right", "up", "down") * SPEED
 	move_and_slide()
