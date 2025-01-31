@@ -14,11 +14,17 @@ func _ready() -> void:
 
 	_on_join_button_pressed() # The clients will automatically join if a local server is created
 
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	_on_viewport_size_changed()
 
-func _process(delta: float) -> void:
+
+func _on_viewport_size_changed():
 	%Say.size.x = get_viewport().size.x / 2
 	%Say.position.x = get_viewport().size.x / 4
 	%Say.position.y = (get_viewport().size.y / 4) * 3
+
+
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("accept"):
 		%Say.visible = !%Say.visible
 		if %Say.visible:
