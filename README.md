@@ -1,4 +1,4 @@
-# Simple Online Multiplayer Networking
+# Simple Online Multiplayer Networking Template
 
 A simple Godot online multiplayer networking setup: connect to an online server, instance a map, spawn players, and update their positions.
 
