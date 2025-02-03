@@ -108,9 +108,8 @@ func send_message(id, message):
 		label.text = "SERVER: " + message
 	else:
 		label.text = str(id) + ": " + message
-	%Messages.get_child(6).queue_free()
+	%Messages.get_child(0).queue_free()
 	%Messages.add_child(label)
-	%Messages.move_child(label, 0)
 	%MessagesDisapearTimer.start()
 
 
